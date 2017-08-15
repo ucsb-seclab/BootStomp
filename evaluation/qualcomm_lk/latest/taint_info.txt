@@ -1,0 +1,24 @@
+base_addr:
+0x8F600000
+
+# method_name, method_addr, caller_name, caller_addr, taint_addr, taint_bb_addr, arg_cnt, non_string_args_list, log_message_xref_addr, log_message_addr
+
+sources:
+mmc_get_device_blocksize, 0x8F60D7E0, partition_read_table, 0x8F606428, 0x8F606444, 0x8F606428, 0, [], 0x8F606BA0, 0x8F64F608
+flash_read_ext, 0x8F614344, boot_linux_from_flash, 0x8F621AEC, 0x8F621D90, 0x8F621D0C, 5, [0, 3, 4], 0x8F6221D8, 0x8F6547A4
+flash_read_ext, 0x8F614344, boot_linux_from_flash, 0x8F621AEC, 0x8F621DB8, 0x8F621D9C, 5, [0, 3, 4], 0x8F62221C, 0x8F6547C8
+
+# method_name, method_addr, arg_cnt, non_string_args_list
+
+sinks_memwrite:
+mmc_write, 0x8F60DE48, 3, [1, 2]
+mmc_write, 0x8F60DE48, 3, [1, 2]
+mmc_write, 0x8F60DE48, 3, [1, 2]
+flash_write, 0x8F61462C, 4, [0, 2, 3]
+flash_write, 0x8F61462C, 4, [0, 2, 3]
+mmc_write, 0x8F60DE48, 3, [1, 2]
+
+# method_name, method_addr, arg_cnt, non_string_args_list
+
+sinks_memcpy:
+memmove, 0x8F62C0D0, 3, [0,1,2]

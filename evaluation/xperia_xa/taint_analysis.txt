@@ -1,0 +1,16 @@
+Log Start 
+Bootloader: /media/badnack/Documents/Code/bootloader/analysis/xperia_xa/lk_trim.img
+=================================
+
+
+------------- Caller 0x1c788 -------------
+02:35:51.102776: Configuration: [('0x1c80a', 'r0'), ('0x1c80a', 'r1'), ('0x1c80a', 'r2')]
+02:35:55.403552: End Configuration
+
+------------- end 0x1c788 -------------
+
+------------- Caller 0x1fa34 -------------
+02:35:55.403667: Configuration: [('0x1fa42', 'r0')]
+02:35:56.525484: End Configuration
+
+------------- end 0x1fa34 -------------

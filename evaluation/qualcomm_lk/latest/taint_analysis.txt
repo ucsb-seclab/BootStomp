@@ -1,0 +1,99 @@
+Log Start 
+Bootloader: /media/badnack/Documents/Code/bootloader/analysis/Evaluation/LK/latest/lk_latest
+=================================
+
+
+------------- Caller 0x8f606428 -------------
+03:01:45.273167: Configuration: [('0x8f606444', 'RETURN')]
+
+Timed out...
+03:11:45.312916: End Configuration
+
+------------- end 0x8f606428 -------------
+
+------------- Caller 0x8f621aec -------------
+03:11:45.313248: Configuration: [('0x8f621db8', 'r0'), ('0x8f621db8', 'r4'), ('0x8f621d90', 'r0'), ('0x8f621db8', 'r3'), ('0x8f621d90', 'r4'), ('0x8f621d90', 'r3')]
+===================== Start Info path =====================
+Dereference address at: 0x8f621d9c
+
+Reason: at location 0x8f621d9c a tainted variable is dereferenced and used as address.
+
+Content of the tainted variable: <BV32 taint_buf_4485_4096[191:160]>
+
+
+Tainted Path 
+----------------
+0x8f621aec -> 0x8f621b08 -> 0x8f621b80 -> 0x8f621b84 -> 0x8f621b8c -> 0x8f621b9c -> 0x8f621ba4 -> 0x8f621bb0 -> 0x8f621bd4 -> 0x8f621bdc -> 0x8f621bec -> 0x8f621bf4 -> 0x8f621c04 -> 0x8f621c18 -> 0x8f621c20 -> 0x8f621c2c -> 0x8f621c38 -> 0x8f621c98 -> 0x8f621ca8 -> 0x8f621cbc -> 0x8f621cd4 -> 0x8f621ce4 -> 0x8f621cf8 -> 0x8f621d00 -> 0x8f621d0c -> 0x8f621d74 -> 0x8f621d7c -> 0x8f621d94
+
+===================== End Info path =====================
+
+
+===================== Start Info path =====================
+Dangerous loop condition at address 0x8f6162d4
+
+Reason: a tainted variable is used in the guard of a loop condition
+
+Condition: <Bool 0x2 < taint_buf_4489_4096[103:96] .. taint_buf_4489_4096[95:88] .. taint_buf_4489_4096[87:80] .. taint_buf_4489_4096[79:72]>
+
+
+Tainted Path 
+----------------
+0x8f621aec -> 0x8f621b08 -> 0x8f621b80 -> 0x8f621b84 -> 0x8f621b8c -> 0x8f621b9c -> 0x8f621ba4 -> 0x8f621bb0 -> 0x8f621bd4 -> 0x8f621bdc -> 0x8f621bec -> 0x8f621bf4 -> 0x8f621c04 -> 0x8f621c18 -> 0x8f621c20 -> 0x8f621c2c -> 0x8f621c38 -> 0x8f621c98 -> 0x8f621ca8 -> 0x8f621cbc -> 0x8f621cd4 -> 0x8f621ce4 -> 0x8f621cf8 -> 0x8f621d00 -> 0x8f621d0c -> 0x8f621d74 -> 0x8f621d7c -> 0x8f621d94 -> 0x8f621d9c -> 0x8f621dbc -> 0x8f621dc4 -> 0x8f621df4 -> 0x8f608fd0 -> 0x8f608ff0 -> 0x8f608ff8 -> 0x8f609000 -> 0x8f609008 -> 0x8f609064 -> 0x8f609068 -> 0x8f60901c -> 0x8f60902c -> 0x8f621dfc -> 0x8f622130 -> 0x8f622160 -> 0x8f621e08 -> 0x8f621e18 -> 0x8f621e34 -> 0x8f621e3c -> 0x8f6160bc -> 0x8f6160e8 -> 0x8f6160f4 -> 0x8f616168 -> 0x8f61610c -> 0x8f616154 -> 0x8f621e4c -> 0x8f621e54 -> 0x8f62bf1c -> 0x8f62bf40 -> 0x8f62bf4c -> 0x8f62bf60 -> 0x8f621e60 -> 0x8f621e6c -> 0x8f621e88 -> 0x8f621e90 -> 0x8f6161a8 -> 0x8f6161c8 -> 0x8f6161d0 -> 0x8f6161d8 -> 0x8f6161f0 -> 0x8f6161fc -> 0x8f616214 -> 0x8f616220 -> 0x8f616228 -> 0x8f6163dc -> 0x8f616404 -> 0x8f616410 -> 0x8f61641c -> 0x8f616428 -> 0x8f6162c8 -> 0x8f6162d4 -> 0x8f616204 -> 0x8f616214 -> 0x8f616220 -> 0x8f616228 -> 0x8f6163dc -> 0x8f616404 -> 0x8f616410 -> 0x8f61641c -> 0x8f616428 -> 0x8f6162c8
+
+===================== End Info path =====================
+
+
+===================== Start Info path =====================
+Dangerous loop condition at address 0x8f6162d4
+
+Reason: a tainted variable is used in the guard of a loop condition
+
+Condition: <Bool 0x3 < taint_buf_4489_4096[103:96] .. taint_buf_4489_4096[95:88] .. taint_buf_4489_4096[87:80] .. taint_buf_4489_4096[79:72]>
+
+
+Tainted Path 
+----------------
+0x8f621aec -> 0x8f621b08 -> 0x8f621b80 -> 0x8f621b84 -> 0x8f621b8c -> 0x8f621b9c -> 0x8f621ba4 -> 0x8f621bb0 -> 0x8f621bd4 -> 0x8f621bdc -> 0x8f621bec -> 0x8f621bf4 -> 0x8f621c04 -> 0x8f621c18 -> 0x8f621c20 -> 0x8f621c2c -> 0x8f621c38 -> 0x8f621c98 -> 0x8f621ca8 -> 0x8f621cbc -> 0x8f621cd4 -> 0x8f621ce4 -> 0x8f621cf8 -> 0x8f621d00 -> 0x8f621d0c -> 0x8f621d74 -> 0x8f621d7c -> 0x8f621d94 -> 0x8f621d9c -> 0x8f621dbc -> 0x8f621dc4 -> 0x8f621df4 -> 0x8f608fd0 -> 0x8f608ff0 -> 0x8f608ff8 -> 0x8f609000 -> 0x8f609008 -> 0x8f609064 -> 0x8f609068 -> 0x8f60901c -> 0x8f60902c -> 0x8f621dfc -> 0x8f622130 -> 0x8f622160 -> 0x8f621e08 -> 0x8f621e18 -> 0x8f621e34 -> 0x8f621e3c -> 0x8f6160bc -> 0x8f6160e8 -> 0x8f6160f4 -> 0x8f616168 -> 0x8f61610c -> 0x8f616154 -> 0x8f621e4c -> 0x8f621e54 -> 0x8f62bf1c -> 0x8f62bf40 -> 0x8f62bf4c -> 0x8f62bf60 -> 0x8f621e60 -> 0x8f621e6c -> 0x8f621e88 -> 0x8f621e90 -> 0x8f6161a8 -> 0x8f6161c8 -> 0x8f6161d0 -> 0x8f6161d8 -> 0x8f6161f0 -> 0x8f6161fc -> 0x8f616214 -> 0x8f616220 -> 0x8f616228 -> 0x8f6163dc -> 0x8f616404 -> 0x8f616410 -> 0x8f61641c -> 0x8f616428 -> 0x8f6162c8 -> 0x8f6162d4 -> 0x8f616204 -> 0x8f616214 -> 0x8f616220 -> 0x8f616228 -> 0x8f6163dc -> 0x8f616404 -> 0x8f616410 -> 0x8f61641c -> 0x8f616428 -> 0x8f6162c8 -> 0x8f6162d4 -> 0x8f616204 -> 0x8f616214 -> 0x8f616220 -> 0x8f616228 -> 0x8f6163dc -> 0x8f616404 -> 0x8f616410 -> 0x8f61641c -> 0x8f616428 -> 0x8f6162c8
+
+===================== End Info path =====================
+
+
+===================== Start Info path =====================
+Sink address: 0x8f62c0d0
+
+Reason: sink accepts r2 which points to the location of memory <BV32 0x28>.
+
+Content of <BV32 0x28>: <BV32 taint_buf_4489_4096[327:320] .. taint_buf_4489_4096[335:328] .. taint_buf_4489_4096[343:336] .. taint_buf_4489_4096[351:344]>
+
+
+Path 
+----------------
+0x8f621aec -> 0x8f621b08 -> 0x8f621b80 -> 0x8f621b84 -> 0x8f621b8c -> 0x8f621b9c -> 0x8f621ba4 -> 0x8f621bb0 -> 0x8f621bd4 -> 0x8f621bdc -> 0x8f621bec -> 0x8f621bf4 -> 0x8f621c04 -> 0x8f621c18 -> 0x8f621c20 -> 0x8f621c2c -> 0x8f621c38 -> 0x8f621c98 -> 0x8f621ca8 -> 0x8f621cbc -> 0x8f621cd4 -> 0x8f621ce4 -> 0x8f621cf8 -> 0x8f621d00 -> 0x8f621d0c -> 0x8f621d74 -> 0x8f621d7c -> 0x8f621d94 -> 0x8f621d9c -> 0x8f621dbc -> 0x8f621dc4 -> 0x8f621df4 -> 0x8f608fd0 -> 0x8f608ff0 -> 0x8f608ff8 -> 0x8f609000 -> 0x8f609008 -> 0x8f609064 -> 0x8f609068 -> 0x8f60901c -> 0x8f60902c -> 0x8f621dfc -> 0x8f622130 -> 0x8f622160 -> 0x8f621e08 -> 0x8f621e18 -> 0x8f621e34 -> 0x8f621e3c -> 0x8f6160bc -> 0x8f6160e8 -> 0x8f6160f4 -> 0x8f616168 -> 0x8f61610c -> 0x8f616154 -> 0x8f621e4c -> 0x8f621e54 -> 0x8f62bf1c -> 0x8f62bf40 -> 0x8f62bf4c -> 0x8f62bf60 -> 0x8f621e60 -> 0x8f621e6c -> 0x8f621e88 -> 0x8f621e90 -> 0x8f6161a8 -> 0x8f6161c8 -> 0x8f6161d0 -> 0x8f6161d8 -> 0x8f6161f0 -> 0x8f6161fc -> 0x8f616214 -> 0x8f616220 -> 0x8f616444
+
+Fully tainted conditions 
+----------------
+None
+===================== End Info path =====================
+
+
+===================== Start Info path =====================
+Sink address: 0x8f62c0d0
+
+Reason: sink accepts r1 which points to the location of memory <BV32 0xc + reg_x0_ret_71428_32>.
+
+Content of <BV32 0xc + reg_x0_ret_71428_32>: <BV32 taint_buf_4489_4096[111:104] .. taint_buf_4489_4096[119:112] .. taint_buf_4489_4096[127:120] .. taint_buf_4489_4096[135:128]>
+
+
+Path 
+----------------
+0x8f621aec -> 0x8f621b08 -> 0x8f621b80 -> 0x8f621b84 -> 0x8f621b8c -> 0x8f621b9c -> 0x8f621ba4 -> 0x8f621bb0 -> 0x8f621bd4 -> 0x8f621bdc -> 0x8f621bec -> 0x8f621bf4 -> 0x8f621c04 -> 0x8f621c18 -> 0x8f621c20 -> 0x8f621c2c -> 0x8f621c38 -> 0x8f621c98 -> 0x8f621ca8 -> 0x8f621cbc -> 0x8f621cd4 -> 0x8f621ce4 -> 0x8f621cf8 -> 0x8f621d00 -> 0x8f621d0c -> 0x8f621d74 -> 0x8f621d7c -> 0x8f621d94 -> 0x8f621d9c -> 0x8f621dbc -> 0x8f621dc4 -> 0x8f621df4 -> 0x8f608fd0 -> 0x8f608ff0 -> 0x8f608ff8 -> 0x8f609000 -> 0x8f609008 -> 0x8f609064 -> 0x8f609068 -> 0x8f60901c -> 0x8f60902c -> 0x8f621dfc -> 0x8f622130 -> 0x8f622160 -> 0x8f621e08 -> 0x8f621e18 -> 0x8f621e34 -> 0x8f621e3c -> 0x8f6160bc -> 0x8f6160e8 -> 0x8f6160f4 -> 0x8f616168 -> 0x8f61610c -> 0x8f616154 -> 0x8f621e4c -> 0x8f621e54 -> 0x8f62bf1c -> 0x8f62bf40 -> 0x8f62bf4c -> 0x8f62bf60 -> 0x8f621e60 -> 0x8f621e6c -> 0x8f621e88 -> 0x8f621e90 -> 0x8f6161a8 -> 0x8f6161c8 -> 0x8f6161d0 -> 0x8f6161d8 -> 0x8f6161f0 -> 0x8f6161fc -> 0x8f616214 -> 0x8f616220 -> 0x8f616444
+
+Fully tainted conditions 
+----------------
+None
+===================== End Info path =====================
+
+
+03:13:34.418170: End Configuration
+
+------------- end 0x8f621aec -------------

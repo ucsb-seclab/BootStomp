@@ -1,0 +1,1 @@
+{"start_with_thumb": "False", "enable_thumb": "False", "info_path": "evaluation/huawei_p8/taint_info.txt", "exit_on_dec_error": "True", "bootloader": "bootloaders/huawei_p8/fastboot.img", "arch": "32"}

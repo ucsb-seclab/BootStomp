@@ -1,0 +1,312 @@
+TP:
+
+1-
+===================== Start Info path =====================
+Sink address: 0x5fdac
+
+Reason: sink accepts parameter x2 which is tainted.
+
+Content of x2: <BV64 0x0#32 .. __add__(taint_buf_261_4096[223:192], (0xffffffff * (0x8421094 * 0x0#41 .. (0xffffffff + taint_buf_261_4096[223:192])[31:9])[49:32] .. 0x0#14), (0x8421094 * 0x0#41 .. (0xffffffff + taint_buf_261_4096[223:192])[31:9])[54:32] .. 0#9)>
+
+
+Path 
+----------------
+0x52f3cL -> 0x52f78L -> 0x530d4L -> 0x530e4L -> 0x52f98L -> 0x52fb8L -> 0x52fc8L -> 0x52fecL -> 0x53000L -> 0x53014L -> 0x5301cL -> 0x53030L -> 0x53044L -> 0x53050L -> 0x5305cL -> 0x53068L -> 0x5319cL -> 0x531dcL -> 0x531e4L -> 0x531f0L
+
+Fully tainted conditions 
+----------------
+0x53068L: <Bool taint_buf_261_4096[159:128] == taint_buf_261_4096[191:184] .. taint_buf_261_4096[183:176] .. taint_buf_261_4096[175:168] .. taint_buf_261_4096[167:160]>
+
+===================== End Info path =====================
+
+===================== Start Info path =====================
+Sink address: 0x5fdac
+
+Reason: sink accepts x0 which points to the location of memory <BV64 reg_20_45_64>.
+
+Content of <BV64 reg_20_45_64>: <BV64 taint_buf_257_4096[15:8] .. taint_buf_257_4096[23:16] .. taint_buf_257_4096[31:24] .. taint_buf_257_4096[39:32] .. taint_buf_257_4096[47:40] .. taint_buf_257_4096[55:48] .. taint_buf_257_4096[63:56] .. taint_buf_257_4096[71:64]>
+
+
+Path 
+----------------
+0x52f3cL -> 0x52f78L -> 0x530d4L -> 0x530e4L -> 0x52f98L -> 0x52fb8L -> 0x52fc8L -> 0x52fecL -> 0x53000L -> 0x53014L -> 0x5301cL -> 0x53030L -> 0x53044L -> 0x53050L -> 0x5305cL -> 0x53068L -> 0x53074L -> 0x53088L -> 0x53090L -> 0x5314cL
+
+Fully tainted conditions 
+----------------
+0x53068L: <Bool taint_buf_261_4096[159:128] != taint_buf_261_4096[191:184] .. taint_buf_261_4096[183:176] .. taint_buf_261_4096[175:168] .. taint_buf_261_4096[167:160]>
+
+===================== End Info path =====================
+
+===================== Start Info path =====================
+Sink address: 0x5fdac
+
+Reason: sink accepts x1 which points to the location of memory <BV64 0x3030300961746164>.
+
+Content of <BV64 0x3030300961746164>: <BV64 taint_buf_271_4096[7:0] .. taint_buf_271_4096[15:8] .. taint_buf_271_4096[23:16] .. taint_buf_271_4096[31:24] .. taint_buf_271_4096[39:32] .. taint_buf_271_4096[47:40] .. taint_buf_271_4096[55:48] .. taint_buf_271_4096[63:56]>
+
+
+Path 
+----------------
+0x52f3cL -> 0x52f78L -> 0x530d4L -> 0x530e4L -> 0x52f98L -> 0x52fb8L -> 0x52fc8L -> 0x52fecL -> 0x53000L -> 0x53014L -> 0x5301cL -> 0x53030L -> 0x53044L -> 0x53050L -> 0x5305cL -> 0x53068L -> 0x53074L -> 0x53088L -> 0x53090L -> 0x5314cL
+
+Fully tainted conditions 
+----------------
+0x53068L: <Bool taint_buf_261_4096[159:128] != taint_buf_261_4096[191:184] .. taint_buf_261_4096[183:176] .. taint_buf_261_4096[175:168] .. taint_buf_261_4096[167:160]>
+
+===================== End Info path =====================
+
+===================== Start Info path =====================
+Sink address: 0x5fdac
+
+Reason: sink accepts x1 which points to the location of memory <BV64 0x3030300961746164>.
+
+Content of <BV64 0x3030300961746164>: <BV64 taint_buf_325_4096[7:0] .. taint_buf_325_4096[15:8] .. taint_buf_325_4096[23:16] .. taint_buf_325_4096[31:24] .. taint_buf_325_4096[39:32] .. taint_buf_325_4096[47:40] .. taint_buf_325_4096[55:48] .. taint_buf_325_4096[63:56]>
+
+
+Path 
+----------------
+0x52f3cL -> 0x52f78L -> 0x530d4L -> 0x530e4L -> 0x52f98L -> 0x52fb8L -> 0x52fc8L -> 0x52fecL -> 0x53000L -> 0x53014L -> 0x5301cL -> 0x53030L -> 0x53044L -> 0x53050L -> 0x5305cL -> 0x53068L -> 0x5319cL -> 0x531dcL -> 0x531e4L -> 0x531f0L
+
+Fully tainted conditions 
+----------------
+0x53068L: <Bool taint_buf_261_4096[159:128] == taint_buf_261_4096[191:184] .. taint_buf_261_4096[183:176] .. taint_buf_261_4096[175:168] .. taint_buf_261_4096[167:160]>
+
+===================== End Info path =====================
+
+===================== Start Info path =====================
+Dereference address at: 0x53074L
+
+Reason: at location 0x53074L a tainted variable is dereferenced and used as address.
+
+Content of the tainted variable: <BV64 0x0#32 .. taint_buf_261_4096[31:0]>
+
+
+Tainted Path 
+----------------
+0x52f3cL -> 0x52f78L -> 0x530d4L -> 0x530e4L -> 0x52f98L -> 0x52fb8L -> 0x52fc8L -> 0x52fecL -> 0x53000L -> 0x53014L -> 0x5301cL -> 0x53030L -> 0x53044L -> 0x53050L -> 0x5305cL -> 0x53068L
+
+===================== End Info path =====================
+
+===================== Start Info path =====================
+Dereference address at: 0x5319cL
+
+Reason: at location 0x5319cL a tainted variable is dereferenced and used as address.
+
+Content of the tainted variable: <BV64 0x0#32 .. __add__(taint_buf_261_4096[223:192], (0xffffffff * (0x8421094 * 0x0#41 .. (0xffffffff + taint_buf_261_4096[223:192])[31:9])[49:32] .. 0x0#14), (0x8421094 * 0x0#41 .. (0xffffffff + taint_buf_261_4096[223:192])[31:9])[54:32] .. 0#9)>
+
+
+Tainted Path 
+----------------
+0x52f3cL -> 0x52f78L -> 0x530d4L -> 0x530e4L -> 0x52f98L -> 0x52fb8L -> 0x52fc8L -> 0x52fecL -> 0x53000L -> 0x53014L -> 0x5301cL -> 0x53030L -> 0x53044L -> 0x53050L -> 0x5305cL -> 0x53068L
+
+===================== End Info path =====================
+
+
+2-
+===================== Start Info path =====================
+Dangerous loop condition at address 0x3e56cL
+
+Reason: a tainted variable is used in the guard of a loop condition
+
+Condition: <Bool __add__(0x1, reg_x0_ret_4_64[31:0], 0x1) == taint_buf_4703_4096[1103:1072]>
+
+
+Tainted Path 
+----------------
+0x3e414L -> 0x3e438L -> 0x3e440L -> 0x3e44cL -> 0x3e454L -> 0x3e46cL -> 0x3e474L -> 0x3e488L -> 0x3e490L -> 0x3e4b4L -> 0x3e4bcL -> 0x3e4d0L -> 0x3e4dcL -> 0x3e4e4L -> 0x3e564L -> 0x3e57cL -> 0x3e588L -> 0x3e594L -> 0x3e56cL -> 0x3e57cL -> 0x3e588L -> 0x3e594L
+
+===================== End Info path =====================
+
+===================== Start Info path =====================
+Dangerous loop condition at address 0x3e57cL
+
+Reason: a tainted variable is used in the guard of a loop condition
+
+Condition: <Bool (0#56 .. taint_buf_4703_4096[1503:1496])[31:0] != 0x0#56 .. ((0x51eb851f * 0x0#32 .. reg_x0_ret_5_64[31:0])[44:37] + (255 * ((0xcccccccd * 0x0#37 .. (0x51eb851f * 0x0#32 .. reg_x0_ret_5_64[31:0])[63:37])[41:35] + (0xcccccccd * 0x0#37 .. (0x51eb851f * 0x0#32 .. reg_x0_ret_5_64[31:0])[63:37])[39:35] .. 0#2) .. 0#1))[31:0]>
+
+
+Tainted Path 
+----------------
+0x3e414L -> 0x3e438L -> 0x3e440L -> 0x3e44cL -> 0x3e454L -> 0x3e46cL -> 0x3e474L -> 0x3e488L -> 0x3e490L -> 0x3e4b4L -> 0x3e4bcL -> 0x3e4d0L -> 0x3e4dcL -> 0x3e4e4L -> 0x3e564L -> 0x3e57cL -> 0x3e588L -> 0x3e594L -> 0x3e56cL -> 0x3e57cL -> 0x3e588L -> 0x3e594L -> 0x3e56cL
+
+===================== End Info path =====================
+
+===================== Start Info path =====================
+Dangerous loop condition at address 0x3e588L
+
+Reason: a tainted variable is used in the guard of a loop condition
+
+Condition: <Bool (0#56 .. taint_buf_4703_4096[1511:1504])[31:0] != 0x0#56 .. ((0xcccccccd * 0x0#32 .. reg_x0_ret_5_64[31:0])[42:35] + (255 * ((0xcccccccd * 0x0#35 .. (0xcccccccd * 0x0#32 .. reg_x0_ret_5_64[31:0])[63:35])[41:35] + (0xcccccccd * 0x0#35 .. (0xcccccccd * 0x0#32 .. reg_x0_ret_5_64[31:0])[63:35])[39:35] .. 0#2) .. 0#1))[31:0]>
+
+
+Tainted Path 
+----------------
+0x3e414L -> 0x3e438L -> 0x3e440L -> 0x3e44cL -> 0x3e454L -> 0x3e46cL -> 0x3e474L -> 0x3e488L -> 0x3e490L -> 0x3e4b4L -> 0x3e4bcL -> 0x3e4d0L -> 0x3e4dcL -> 0x3e4e4L -> 0x3e564L -> 0x3e57cL -> 0x3e588L -> 0x3e594L -> 0x3e56cL -> 0x3e57cL -> 0x3e588L -> 0x3e594L -> 0x3e56cL -> 0x3e57cL
+
+===================== End Info path =====================
+
+===================== Start Info path =====================
+Dangerous loop condition at address 0x3e594L
+
+Reason: a tainted variable is used in the guard of a loop condition
+
+Condition: <Bool (0#56 .. taint_buf_4703_4096[1711:1704])[31:0] != 0x0#56 .. (reg_x0_ret_5_64[7:0] + (255 * ((0xcccccccd * 0x0#32 .. reg_x0_ret_5_64[31:0])[41:35] + (0xcccccccd * 0x0#32 .. reg_x0_ret_5_64[31:0])[39:35] .. 0#2) .. 0#1))[31:0]>
+
+
+Tainted Path 
+----------------
+0x3e414L -> 0x3e438L -> 0x3e440L -> 0x3e44cL -> 0x3e454L -> 0x3e46cL -> 0x3e474L -> 0x3e488L -> 0x3e490L -> 0x3e4b4L -> 0x3e4bcL -> 0x3e4d0L -> 0x3e4dcL -> 0x3e4e4L -> 0x3e564L -> 0x3e57cL -> 0x3e588L -> 0x3e594L -> 0x3e56cL -> 0x3e57cL -> 0x3e588L -> 0x3e594L -> 0x3e56cL -> 0x3e57cL -> 0x3e588L -> 0x3e594L -> 0x3e56cL -> 0x3e57cL -> 0x3e588L
+
+===================== End Info path =====================
+
+3-
+===================== Start Info path =====================
+Dangerous loop condition at address 0x3f728L
+
+Reason: a tainted variable is used in the guard of a loop condition
+
+Condition: <Bool taint_buf_847_4096[31:0] != 0x5f4d454f>
+
+
+Tainted Path 
+----------------
+0x3f654L -> 0x3f690L -> 0x3f69cL -> 0x3f6a8L -> 0x3f6acL -> 0x3f6bcL -> 0x3f6c4L -> 0x3f6d0L -> 0x3f6d8L -> 0x3f700L -> 0x3f718L -> 0x3f728L -> 0x3f738L -> 0x3f74cL -> 0x3f758L -> 0x3f77cL -> 0x3f6f4L -> 0x3f700L -> 0x3f718L
+
+===================== End Info path =====================
+
+===================== Start Info path =====================
+Dangerous loop condition at address 0x3f738L
+
+Reason: a tainted variable is used in the guard of a loop condition
+
+Condition: <Bool taint_buf_847_4096[63:56] .. taint_buf_847_4096[55:48] .. taint_buf_847_4096[47:40] .. taint_buf_847_4096[39:32] != 0x4f464e49>
+
+
+Tainted Path 
+----------------
+0x3f654L -> 0x3f690L -> 0x3f69cL -> 0x3f6a8L -> 0x3f6acL -> 0x3f6bcL -> 0x3f6c4L -> 0x3f6d0L -> 0x3f6d8L -> 0x3f700L -> 0x3f718L -> 0x3f728L -> 0x3f738L -> 0x3f74cL -> 0x3f758L -> 0x3f77cL -> 0x3f6f4L -> 0x3f700L -> 0x3f718L -> 0x3f728L
+
+===================== End Info path =====================
+
+===================== Start Info path =====================
+Dangerous loop condition at address 0x3f74cL
+
+Reason: a tainted variable is used in the guard of a loop condition
+
+Condition: <Bool taint_buf_847_4096[127:120] .. taint_buf_847_4096[119:112] .. taint_buf_847_4096[111:104] .. taint_buf_847_4096[103:96] != reg_10_834_64[31:0]>
+
+
+Tainted Path 
+----------------
+0x3f654L -> 0x3f690L -> 0x3f69cL -> 0x3f6a8L -> 0x3f6acL -> 0x3f6bcL -> 0x3f6c4L -> 0x3f6d0L -> 0x3f6d8L -> 0x3f700L -> 0x3f718L -> 0x3f728L -> 0x3f738L -> 0x3f74cL -> 0x3f758L -> 0x3f77cL -> 0x3f6f4L -> 0x3f700L -> 0x3f718L -> 0x3f728L -> 0x3f738L
+
+===================== End Info path =====================
+
+4-
+------------- Caller 0x2797c -------------
+20:24:12.564280: Configuration: [('0x27b6c', 'x2'), ('0x27b00', 'x1'), ('0x27b00', 'x0'), ('0x27b6c', 'x1'), ('0x27a88', 'RETURN'), ('0x27b00', 'x3'), ('0x27b6c', 'x0'), ('0x27b00', 'x2'), ('0x27b6c', 'x3')]
+===================== Start Info path =====================
+Dereference address at: 0x27ae8L
+
+Reason: at location 0x27ae8L a tainted variable is dereferenced and used as address.
+
+Content of the tainted variable: <BV64 0x0#32 .. taint_buf_2409_4096[127:96]>
+
+
+Tainted Path 
+----------------
+0x2797cL -> 0x279a4L -> 0x279acL -> 0x279d0L -> 0x279e4L -> 0x279e8L -> 0x279f0L -> 0x279f4L -> 0x27a00L -> 0x27a04L -> 0x27a18L -> 0x27a28L -> 0x27a34L -> 0x27a40L -> 0x27a44L -> 0x27a50L -> 0x27a58L -> 0x27a64L -> 0x27a6cL -> 0x27a80L -> 0x27a84L -> 0x27a8cL -> 0x27a94L -> 0x5f92cL -> 0x5f98cL -> 0x5f994L -> 0x5f9dcL -> 0x5f9e0L -> 0x27abcL -> 0x1f04L -> 0x1f94L -> 0x1f98L -> 0x1f9cL -> 0x1fb0L -> 0x1fe8L -> 0x2018L -> 0x206cL -> 0x2080L -> 0x27ad4L -> 0x27ae0L
+
+===================== End Info path =====================
+
+
+5-
+===================== Start Info path =====================
+Dereference address at: 0x27b58L
+
+Reason: at location 0x27b58L a tainted variable is dereferenced and used as address.
+
+Content of the tainted variable: <BV64 0x0#32 .. taint_buf_2409_4096[191:160]>
+
+
+Tainted Path 
+----------------
+0x2797cL -> 0x279a4L -> 0x279acL -> 0x279d0L -> 0x279e4L -> 0x279e8L -> 0x279f0L -> 0x279f4L -> 0x27a00L -> 0x27a04L -> 0x27a18L -> 0x27a28L -> 0x27a34L -> 0x27a40L -> 0x27a44L -> 0x27a50L -> 0x27a58L -> 0x27a64L -> 0x27a6cL -> 0x27a80L -> 0x27a84L -> 0x27a8cL -> 0x27a94L -> 0x5f92cL -> 0x5f98cL -> 0x5f994L -> 0x5f9dcL -> 0x5f9e0L -> 0x27abcL -> 0x1f04L -> 0x1f94L -> 0x1f98L -> 0x1f9cL -> 0x1fb0L -> 0x1fe8L -> 0x2018L -> 0x206cL -> 0x2080L -> 0x27ad4L -> 0x27ae0L -> 0x27ae8L -> 0x27b04L -> 0x27b08L -> 0x5f92cL -> 0x5f98cL -> 0x5f994L -> 0x5f9dcL -> 0x5f9e0L -> 0x27b40L -> 0x1f04L -> 0x1f94L -> 0x1f98L -> 0x1f9cL -> 0x1fb0L -> 0x1fe8L -> 0x2018L -> 0x206cL -> 0x2080L
+
+===================== End Info path =====================
+
+
+FP:
+
+1-
+===================== Start Info path =====================
+Sink address: 0x5fdac
+
+Reason: sink accepts x2 which points to the location of memory <BV64 0x3e00>.
+
+Content of <BV64 0x3e00>: <BV64 taint_buf_274_4096[7:0] .. taint_buf_274_4096[15:8] .. taint_buf_274_4096[23:16] .. taint_buf_274_4096[31:24] .. taint_buf_274_4096[39:32] .. taint_buf_274_4096[47:40] .. taint_buf_274_4096[55:48] .. taint_buf_274_4096[63:56]>
+
+
+Path 
+----------------
+0x52f3cL -> 0x52f78L -> 0x530d4L -> 0x530e4L -> 0x52f98L -> 0x52fb8L -> 0x52fc8L -> 0x52fecL -> 0x53000L -> 0x53014L -> 0x5301cL -> 0x53030L -> 0x53044L -> 0x53050L -> 0x5305cL -> 0x53068L -> 0x53074L -> 0x53088L -> 0x53090L -> 0x5314cL
+
+Fully tainted conditions 
+----------------
+0x53068L: <Bool taint_buf_261_4096[159:128] != taint_buf_261_4096[191:184] .. taint_buf_261_4096[183:176] .. taint_buf_261_4096[175:168] .. taint_buf_261_4096[167:160]>
+
+===================== End Info path =====================
+
+
+2-
+===================== Start Info path =====================
+Sink address: 0x5fdac
+
+Reason: sink accepts x1 which points to the location of memory <BV64 0x7fffffffffefee9>.
+
+Content of <BV64 0x7fffffffffefee9>: <BV64 taint_buf_632_4096[15:8] .. taint_buf_632_4096[23:16] .. taint_buf_632_4096[31:24] .. taint_buf_632_4096[39:32] .. taint_buf_632_4096[47:40] .. taint_buf_632_4096[55:48] .. taint_buf_632_4096[63:56] .. taint_buf_632_4096[71:64]>
+
+
+Path 
+----------------
+0x1a5b4L -> 0x1a638L -> 0x1a660L -> 0x1a688L -> 0x1a6b0L -> 0x1a6dcL -> 0x1a6e8L -> 0x1a6f0L -> 0x1a6fcL -> 0x1a704L -> 0x1a718L -> 0x1a720L -> 0x1a730L -> 0x1a73cL -> 0x1a744L -> 0x1a758L -> 0x1a75cL -> 0x1f3a8L
+
+Fully tainted conditions 
+----------------
+None
+===================== End Info path =====================
+
+3-
+===================== Start Info path =====================
+Sink address: 0x5fdac
+
+Reason: sink accepts x1 which points to the location of memory <BV64 0x7fffffffffefee9>.
+
+Content of <BV64 0x7fffffffffefee9>: <BV64 taint_buf_1802_4096[15:8] .. taint_buf_1802_4096[23:16] .. taint_buf_1802_4096[31:24] .. taint_buf_1802_4096[39:32] .. taint_buf_1802_4096[47:40] .. taint_buf_1802_4096[55:48] .. taint_buf_1802_4096[63:56] .. taint_buf_1802_4096[71:64]>
+
+
+Path 
+----------------
+0x1a5b4L -> 0x1a638L -> 0x1a660L -> 0x1a688L -> 0x1a6b0L -> 0x1a6dcL -> 0x1a6e8L -> 0x1a6f0L -> 0x1a6fcL -> 0x1a704L -> 0x1a718L -> 0x1a720L -> 0x1a730L -> 0x1a73cL -> 0x1a744L -> 0x1a758L -> 0x1a75cL -> 0x1f3a8L
+
+Fully tainted conditions 
+----------------
+None
+===================== End Info path =====================
+
+
+uncertain:
+20:23:00.414685: Configuration: [('0x17278', 'x0')]
+===================== Start Info path =====================
+Dangerous loop condition at address 0x172a8L
+
+Reason: a tainted variable is used in the guard of a loop condition
+
+Condition: <Bool (0#56 .. taint_buf_2075_4096[23:16])[31:0] != 0x3a>
+
+
+Tainted Path 
+----------------
+0x17224L -> 0x17250L -> 0x17258L -> 0x17268L -> 0x17274L -> 0x1727cL -> 0x17288L -> 0x172a8L -> 0x172a0L
+
+===================== End Info path =====================

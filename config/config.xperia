@@ -1,0 +1,1 @@
+{"start_with_thumb": "True", "enable_thumb": "True", "info_path": "evaluation/xperia_xa/taint_info.txt", "exit_on_dec_error": "False", "bootloader": "bootloaders/xperia_xa/lk_trim.img", "arch": "32", "unlock_addr": "0x1C214"}

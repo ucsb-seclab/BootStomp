@@ -1,0 +1,20 @@
+base_addr:
+0x40000000
+
+# method_name, method_addr, caller_name, caller_addr, taint_addr, taint_bb_addr, arg_cnt, non_string_args_list, log_message_xref_addr, log_message_addr
+
+sources:
+sub_40003DB4, 0x40003DB4, sub_4001C788, 0x4001C788, 0x4001C80A, 0x4001C7F0, 3, [0, 1, 2], 0x4001C818, 0x40054900
+sub_4001F960, 0x4001F960, sub_4001FA34, 0x4001FA34, 0x4001FA42, 0x4001FA34, 1, [0], 0x4001FA9C, 0x400561C0
+
+# method_name, method_addr, arg_cnt, non_string_args_list
+
+sinks_memwrite:
+sub_4001F960, 0x4001F960, 1, [0]
+
+# method_name, method_addr, arg_cnt, non_string_args_list
+
+sinks_memcpy:
+sub_40024358, 0x40024358, 3, [0,1,2]
+sub_40031940, 0x40031940, 3, [0,1,2]
+

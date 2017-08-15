@@ -1,0 +1,1 @@
+{"start_with_thumb": "False", "enable_thumb": "True", "info_path": "evaluation/nexus_9/taint_info.txt", "exit_on_dec_error": "True", "bootloader": "bootloaders/nexus_9/hboot.img", "arch": "32", "unlock_addr": "0x70B14"}

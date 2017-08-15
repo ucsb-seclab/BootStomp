@@ -1,0 +1,1 @@
+{"start_with_thumb": "False", "enable_thumb": "True", "info_path": "evaluation/qualcomm_lk/latest/taint_info.txt", "exit_on_dec_error": "True", "bootloader": "bootloaders/qualcomm_lk/lk_latest", "arch": "32", "unlock_addr": "0x8F6226E4"}

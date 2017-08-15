@@ -1,0 +1,36 @@
+base_addr:
+0x70000000
+
+# method_name, method_addr, caller_name, caller_addr, taint_addr, taint_bb_addr, arg_cnt, non_string_args_list, log_message_xref_addr, log_message_addr
+
+sources:
+taint_seed, 0x7007BDDC, fastboot_command_handler, 0x70076698, 0x70076C44, 0x70076C36, 3, [0, 1], 0x70076C58, 0x700CE318
+taint_seed, 0x7007BDDC, fastboot_command_handler, 0x70076698, 0x70076CC8, 0x70076CB6, 3, [0, 1], 0x70076CE0, 0x700CE318
+sub_700780AC, 0x700780AC, sub_70078988, 0x70078988, 0x70078B02, 0x70078AFA, 3, [1, 2], 0x70078B0A, 0x700CF1E1
+sub_700780AC, 0x700780AC, sub_70078988, 0x70078988, 0x70078B22, 0x70078B0E, 3, [1, 2], 0x70078B2E, 0x700CF1E1
+sub_7005AE50, 0x7005AE50, sub_70078EEC, 0x70078EEC, 0x70078F44, 0x70078F3C, 4, [0, 3], 0x70078F52, 0x700CFCAF
+taint_souce, 0x70094010, sub_7007CC74, 0x7007CC74, 0x7007CCD4, 0x7007CCD0, 2, [0, 1], 0x7007CCE0, 0x700D1EB1
+init_struct, 0x70093C24, sub_7007E8D0, 0x7007E8D0, 0x7007E928, 0x7007E912, 4, [0, 1, 3], 0x7007E932, 0x700D2AA5
+sub_70080B2C, 0x70080B2C, sub_7007E8D0, 0x7007E8D0, 0x7007E90A, 0x7007E90A, 0, [], 0x7007E938, 0x700D2AA5
+taint_souce, 0x70094010, sub_7007E9EC, 0x7007E9EC, 0x7007ED16, 0x7007ED0A, 2, [0, 1], 0x7007ED28, 0x700D2CD0
+taint_seed, 0x7007BDDC, sub_70085F74, 0x70085F74, 0x70086070, 0x7008606C, 3, [0, 1], 0x700860A8, 0x700D68D3
+taint_seed, 0x7007BDDC, sub_7008661C, 0x7008661C, 0x700867DE, 0x700867DA, 3, [0, 1], 0x7008681E, 0x700D68D3
+taint_seed, 0x7007BDDC, sub_70086148, 0x70086148, 0x70086498, 0x7008648C, 3, [0, 1], 0x700864C0, 0x700D698D
+
+# method_name, method_addr, arg_cnt, non_string_args_list
+
+sinks_memwrite:
+sub_7007BD74, 0x7007BD74, 3, [0, 1]
+sub_7007BE4C, 0x7007BE4C, 3, [0, 1, 2]
+sub_7007BE14, 0x7007BE14, 3, [0, 1]
+sub_70079818, 0x70079818, 4, [0, 1, 2]
+sub_70079818, 0x70079818, 4, [0, 1, 2]
+init_struct, 0x70093C24, 4, [0, 1, 3]
+sub_70080B2C, 0x70080B2C, 0, []
+sub_7007BE14, 0x7007BE14, 3, [0, 1]
+sub_7007BE14, 0x7007BE14, 3, [0, 1]
+
+# method_name, method_addr, arg_cnt, non_string_args_list
+
+sinks_memcpy:
+strcpy, 0x70087CBA, 2, [0,1]
