@@ -64,7 +64,7 @@ To check BootStomp results, use the script `result_pretty_print.py`, as follows:
 
 Other references
 -------------
-* [Kernel and lk source for Qualcomm MT65x2](https://github.com/ariafan/MT65x2_kernel_lk)
+* [Kernel and lk source for MediaTek MT65x2](https://github.com/ariafan/MT65x2_kernel_lk)
 * [MediaTek details: Partitions and Preloader](https://sturmflut.github.io/mediatek/2015/07/04/mediatek-details-partitions-and-preloader)
 * [Reverse Engineering Android's Aboot](http://newandroidbook.com/Articles/aboot.html)
 * [(L)ittle (K)ernel based Android bootloader](https://www.codeaurora.org/blogs/little-kernel-based-android-bootloader)
