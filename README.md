@@ -74,7 +74,6 @@ Other references
 * [Verifying Boot](https://source.android.com/security/verifiedboot/verified-boot.html)
 * [Freeing my tablet (Android hacking, SW and HW)](https://www.thanassis.space/android.html)
 * [How to lock the samsung download mode using an undocumented feature of aboot](https://ge0n0sis.github.io/posts/2016/05/how-to-lock-the-samsung-download-mode-using-an-undocumented-feature-of-aboot/)
-* [Android Security Internals - An In-Depth Guide to Android’s Security Architecture](http://files.cnblogs.com/files/jiayy/Android_Security_Intern__An_In-Depth_Guide_to_Android_s_Security_Architecture.pdf)
 * [BIOS and Secure Boot Attacks Uncovered](http://www.intelsecurity.com/resources/pr-bios-secure-boot-attacks-uncovered.pdf)
 * [Apple IOS Security](https://www.apple.com/business/docs/iOS_Security_Guide.pdf)
 * [Debugging HTC phone boot-laoders](http://archive.hack.lu/2013/hacklu2013_hbootdbg.pdf)
