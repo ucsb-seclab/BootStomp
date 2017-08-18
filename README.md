@@ -1,7 +1,7 @@
 BootStomp
 ===================
 
-[![License](https://img.shields.io/github/license/angr/angr.svg)](https://github.com/ucsb-seclab/bootstomp/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/angr/angr.svg)](https://github.com/ucsb-seclab/BootStomp/blob/master/LICENSE)
 
 BootStomp is a boot-loader bug finder. It looks for two different class of bugs: memory corruption and state storage vulnerabilities. For more info please refer to the BootStomp paper at https://seclab.cs.ucsb.edu/academic/publishing/#bootstomp-security-bootloaders-mobile-devices-2017 
 
