@@ -61,6 +61,7 @@ Run
 To check BootStomp results, use the script `result_pretty_print.py`, as follows:
  > python result_pretty_print.py results_file
 
+#### [Exploit for CVE-2017-2729](https://github.com/ucsb-seclab/BootStomp/tree/master/tools/huawei_tools#oeminfo_exploitpy)
 
 Other references
 -------------
