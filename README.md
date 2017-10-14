@@ -42,7 +42,7 @@ cd BootStomp
 # run BootStomp's taint analysis on one of the examples
 # this will take about 30 minutes
 python taint_analysis/bootloadertaint.py config/config.huawei
-# the last line of the ourput will be something like:
+# the last line of the output will be something like:
 # INFO    | 2017-10-14 01:54:10,617 | _CoreTaint | Results in /tmp/BootloaderTaint_fastboot.img_.out
 
 # you can then "pretty print" the results using:
