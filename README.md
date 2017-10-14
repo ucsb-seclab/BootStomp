@@ -26,7 +26,46 @@ Pre-requisites
 
 How to run it
 --
+## Run BootStomp using docker
+The easiest way to use BootStomp is to run it in a docker container.
+The folder `docker` contains an appropriate `Dockerfile`.
+These are the commands to use it.
+```bash
+cd docker
+# build the docker image
+docker build -t bootstomp .
+# run the docker image (if you need, use proper options to have persistent changes or shared files)
+docker run -it bootstomp
 
+# now you are inside a docker container
+cd BootStomp
+# run BootStomp's taint analysis on one of the examples
+# this will take about 30 minutes
+python taint_analysis/bootloadertaint.py config/config.huawei
+# the last line of the output will be something like:
+# INFO    | 2017-10-14 01:54:10,617 | _CoreTaint | Results in /tmp/BootloaderTaint_fastboot.img_.out
+
+# you can then "pretty print" the results using:
+python taint_analysis/result_pretty_print.py /tmp/BootloaderTaint_fastboot.img_.out
+```
+The output should be something like this:
+```
+...
+17)
+===================== Start Info path =====================
+Dereference address at: 0x5319cL
+Reason: at location 0x5319cL a tainted variable is dereferenced and used as address.
+...
+Tainted Path 
+----------------
+0x52f3cL -> 0x52f78L -> 0x52f8cL -> 0x52fb8L -> 0x52fc8L -> 0x52fecL -> 0x53000L -> 0x53014L -> 0x5301cL -> 0x53030L -> 0x53044L -> 0x53050L -> 0x5305cL -> 0x53068L
+===================== End Info path =====================
+# Total sinks related alerts: 5
+# Total loop related alerts: 8
+# Total dereference related alerts: 4
+```
+
+## Run BootStomp manually
 ### Automatic detection of taint sources and sinks
 
 1. Load the boot-loader binary in IDA (we used v6.95). Depending on the CPU architecture of the phone it has been extracted from, 32 bit or 64 bit IDA is needed. 
