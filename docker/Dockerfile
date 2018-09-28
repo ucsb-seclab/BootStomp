@@ -1,7 +1,6 @@
 FROM angr/angr
 
 RUN su angr -c "cd /home/angr/; git clone https://github.com/ucsb-seclab/BootStomp"
-
 RUN su angr -c "cd /home/angr/angr-dev/ana; git checkout 94928f773661eaa5a6c2dec40dad199c70daedab"
 RUN su angr -c "cd /home/angr/angr-dev/angr; git checkout 63db61e5d925355688e88dda00f8321c214d7df1"
 RUN su angr -c "cd /home/angr/angr-dev/archinfo; git checkout 39a26e4cbd7b93ca1e73c76cf54cd2263b6f9285"
@@ -16,3 +15,8 @@ RUN su angr -c "cd /home/angr/angr-dev/simuvex; git checkout 8b9d1f44dfa6437c847
 RUN su angr -c "cd /home/angr/angr-dev/superstruct; git checkout ff8c6aa89f9709895475b1de96864113db11e9ed"
 RUN su angr -c "cd /home/angr/angr-dev/vex; git checkout 3a620e43ecc71cb9e5470995a45bbce4a600293f"
 
+# use a compatible cffi version
+# and recompile pyvex as we checked it out
+RUN apt-get update && apt-get install -y python-pip
+RUN su angr -c "source /home/angr/.local/bin/virtualenvwrapper.sh && workon angr && pip install cffi==1.9.1 && pip install bintrees"
+RUN su angr -c "source /home/angr/.local/bin/virtualenvwrapper.sh && workon angr && cd /home/angr/angr-dev/pyvex; python setup.py install"
