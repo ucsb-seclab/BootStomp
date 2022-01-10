@@ -2,9 +2,8 @@ import _coretaint
 import angr
 import claripy
 import archinfo
-import simuvex
 import logging
-from itertools import product, izip
+from itertools import product
 from summary_functions import *
 import datetime
 import sys
@@ -43,9 +42,9 @@ class UnlockChecker:
         self._filename = filename
         self._arch = arch
         try:
-            self._p = angr.Project(filename, load_options={'main_opts': {'custom_arch': arch}})
+            self._p = angr.Project(filename, load_options={'main_opts': {'arch': arch}})
         except:
-            self._p = angr.Project(filename, load_options={'main_opts': {'custom_arch': arch, 'backend': 'blob'}})
+            self._p = angr.Project(filename, load_options={'main_opts': {'arch': arch, 'backend': 'blob'}})
         self._cfg = None
         self._taint_addr = 0x440
         self._taint_buf = "taint_buf"
@@ -86,7 +85,7 @@ class UnlockChecker:
                     continue
 
                 if phase == 'base_addr':
-                    angr_base_addr = self._p.loader.main_bin.get_min_addr()
+                    angr_base_addr = self._p.loader.main_object.min_addr
                     ida_base_addr = int(line.strip(), 16)
                     if angr_base_addr != ida_base_addr:
                         base_addr = ida_base_addr
@@ -184,12 +183,12 @@ class UnlockChecker:
         loc_writes = ['sp']
         loc_writes += check_push(caller)
         estimated_loc = set()
-        data_sec = [s for s in self._p.loader.main_bin.sections if s.name in ('.bss', '.data', 'data', '.text')]
+        data_sec = [s for s in self._p.sections if s.name in ('.bss', '.data', 'data', '.text')]
         core = _coretaint._CoreTaint(self._p, interfunction_level=0, try_thumb=self._enable_thumb, force_paths=True)
 
         state = self._p.factory.blank_state(
             remove_options={
-                simuvex.o.LAZY_SOLVES
+                angr.options.LAZY_SOLVES
             }
         )
         state.ip = caller
@@ -239,7 +238,7 @@ class UnlockChecker:
         sources = self._get_param_to_taint(start_addr)
         name = self._p.filename.split('/')[-1]
         summarized_f, sinks_info = self._parse_unlock_info()
-        log_path = "/tmp/UnlockChecker_" + name + "_.out"
+        log_path = "UnlockChecker_" + name + "_.out"
         self._core = _coretaint._CoreTaint(self._p, interfunction_level=2, smart_call=False, follow_unsat=True,
                                            log_path=log_path, try_thumb=self._enable_thumb,
                                            exit_on_decode_error=self._exit_on_decode_error, force_paths=True)
@@ -250,7 +249,7 @@ class UnlockChecker:
         # prepare the under-contrainted-based initial state
         s = self._p.factory.blank_state(
             remove_options={
-                simuvex.o.LAZY_SOLVES
+                angr.options.LAZY_SOLVES
             }
         )
 
@@ -284,7 +283,7 @@ class UnlockChecker:
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print "Usage: " + sys.argv[0] + " config.file"
+        print("Usage: " + sys.argv[0] + " config.file")
         sys.exit(0)
 
     config_file = sys.argv[1]

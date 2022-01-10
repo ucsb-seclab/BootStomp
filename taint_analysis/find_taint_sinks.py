@@ -22,31 +22,31 @@ class GetTaintSink:
         global functions_info
 
         if method_list == 0:
-            print "\nPotential memcpy():\n"
+            print("\nPotential memcpy():\n")
             for function_index, function_info in enumerate(self.memcpy_like_functions):
-                print '{}. {}({}, {}) => {}'.format(function_index + 1, function_info.name, hex(function_info.address), function_info.arg_cnt, function_info.xrefs)
+                print('{}. {}({}, {}) => {}'.format(function_index + 1, function_info.name, hex(function_info.address), function_info.arg_cnt, function_info.xrefs))
 
         elif method_list == 1:
-            print "\nSorted by Xref:\n"
+            print("\nSorted by Xref:\n")
             for function_index, function_info in enumerate(helper.functions_info):
-                print '{}. {}({}, {}) => {}'.format(function_index + 1, function_info.name, hex(function_info.address), function_info.arg_cnt, function_info.xrefs)
+                print('{}. {}({}, {}) => {}'.format(function_index + 1, function_info.name, hex(function_info.address), function_info.arg_cnt, function_info.xrefs))
 
         elif method_list == 2:
-            print "\nSorted by Xref until %d:\n" % max_method_index
-            for function_index in xrange(max_method_index):
+            print("\nSorted by Xref until %d:\n" % max_method_index)
+            for function_index in range(max_method_index):
                 function_info = helper.functions_info[function_index]
-                print '{}. {}({}, {}) => {}, {}, {}'.format(function_index + 1, function_info.name, hex(function_info.address), function_info.arg_cnt, function_info.xrefs, function_info.isPotentialMemcpy, function_info.isMemcpy)
+                print('{}. {}({}, {}) => {}, {}, {}'.format(function_index + 1, function_info.name, hex(function_info.address), function_info.arg_cnt, function_info.xrefs, function_info.isPotentialMemcpy, function_info.isMemcpy))
 
         elif method_list == 3:
-            print "\nPotential memcpy()\n"
+            print("\nPotential memcpy()\n")
             for function_index, function_info in enumerate(helper.functions_info):
                 if function_info.isPotentialMemcpy:
-                    print '{}. {}({}, {}) => {}'.format(function_index + 1, function_info.name, hex(function_info.address), function_info.arg_cnt, function_info.xrefs)
+                    print('{}. {}({}, {}) => {}'.format(function_index + 1, function_info.name, hex(function_info.address), function_info.arg_cnt, function_info.xrefs))
         else:
-            print "\nmemcpy()\n"
+            print("\nmemcpy()\n")
             for function_index, function_info in enumerate(helper.functions_info):
                 if function_info.isMemcpy:
-                    print '{}. {}({}, {}) => {}'.format(function_index + 1, function_info.name, hex(function_info.address), function_info.arg_cnt, function_info.xrefs)
+                    print('{}. {}({}, {}) => {}'.format(function_index + 1, function_info.name, hex(function_info.address), function_info.arg_cnt, function_info.xrefs))
 
 
     def render_taint_sink(self):
@@ -57,7 +57,7 @@ class GetTaintSink:
             data += taint_sink.name + ", "
             data += "0x%X" % taint_sink.address + ", "
             data += str(taint_sink.arg_cnt) + ", "
-            data += "[" + ','.join(map(str, xrange(taint_sink.arg_cnt))) + "]"
+            data += "[" + ','.join(map(str, range(taint_sink.arg_cnt))) + "]"
             data += "\n"
 
         return data
@@ -66,7 +66,7 @@ class GetTaintSink:
     def mark_potential_memcpy(self, max_method_index = 0):
         global functions_info
 
-        for function_index in xrange(max_method_index):
+        for function_index in range(max_method_index):
             function_info = helper.functions_info[function_index]
             function_info.arg_cnt = helper.get_function_args_count(function_info.address)
             if function_info.arg_cnt >= self.min_arg_cnt and function_info.arg_cnt <= self.max_arg_cnt:
@@ -76,7 +76,7 @@ class GetTaintSink:
     def mark_memcpy(self, max_method_index = 0):
         global functions_info
 
-        for function_index in xrange(max_method_index):
+        for function_index in range(max_method_index):
             function_info = helper.functions_info[function_index]
             if function_info.isPotentialMemcpy:
                 function_info.isMemcpy = self.is_memcpy_function(function_info.address)
@@ -85,7 +85,7 @@ class GetTaintSink:
     def list_potential_memcpy(self):
         global functions_info
 
-        for function_index in xrange(self.top_xref_limit):
+        for function_index in range(self.top_xref_limit):
             function_info = helper.functions_info[function_index]
             function_info.arg_cnt = helper.get_function_args_count(function_info.address)
             if function_info.arg_cnt >= self.min_arg_cnt and function_info.arg_cnt <= self.max_arg_cnt:
@@ -101,11 +101,11 @@ class GetTaintSink:
         registers = ["LR"]
         memcpy_pattern = [load_mnemonics, store_mnemonics]
         opcode_type = 0
-        instr_addr = basic_block.startEA
-        bb_start = GetTrueName(basic_block.startEA)
+        instr_addr = basic_block.start_ea
+        bb_start = get_ea_name(basic_block.start_ea)
 
-        while instr_addr < basic_block.endEA:
-            mnemonics = GetMnem(instr_addr)
+        while instr_addr < basic_block.end_ea:
+            mnemonics = print_insn_mnem(instr_addr)
             bb_size += 1
 
             if opcode_type < 2:
@@ -113,10 +113,10 @@ class GetTaintSink:
                     opcode_type += 1
 
             if mnemonics in branch_mnemonics:
-                branch_tgt = GetOpnd(instr_addr, 0)
-                branch_tgt_addr = GetOperandValue(instr_addr, 0)
+                branch_tgt = print_operand(instr_addr, 0)
+                branch_tgt_addr = get_operand_value(instr_addr, 0)
                 if branch_tgt in registers:
-                    instr_addr = NextHead(instr_addr)
+                    instr_addr = next_head(instr_addr, 4294967295)
                     continue
 
                 # Intra-procedural jump
@@ -135,14 +135,14 @@ class GetTaintSink:
                     if branch_tgt_addr not in external_calls:
                         external_calls.add(branch_tgt_addr)
 
-            instr_addr = NextHead(instr_addr)
+            instr_addr = next_head(instr_addr, 4294967295)
 
         if is_bb_memcpy:
             if bb_size > self.max_bb_size:
-                print "      |-- BB size(%d) exceeds the threshold(%d), discarding suspicious block at 0x%X" % (bb_size, self.max_bb_size, basic_block.startEA)
+                print("      |-- BB size(%d) exceeds the threshold(%d), discarding suspicious block at 0x%X" % (bb_size, self.max_bb_size, basic_block.start_ea))
                 is_bb_memcpy = False
             else:
-                print "      |-- Signature found in basic_block at 0x%X" % basic_block.startEA
+                print("      |-- Signature found in basic_block at 0x%X" % basic_block.start_ea)
 
         return is_bb_memcpy
 
@@ -161,16 +161,16 @@ class GetTaintSink:
         external_calls = set()
 
         for block in flow_chart:
-            is_bb_memcpy = self.is_memcpy_block(block, external_calls, function.startEA, function.endEA, interfunction_level)
+            is_bb_memcpy = self.is_memcpy_block(block, external_calls, function.start_ea, function.end_ea, interfunction_level)
             is_func_memcpy = is_func_memcpy or is_bb_memcpy
 
         if is_func_memcpy:
             call_count_from_function = len(external_calls)
 
             if call_count_from_function > self.max_call_count:
-                print "      |-- Distinct call count(%d) exceeds the threshold(%d), discarding suspicious function at 0x%X" % (call_count_from_function, self.max_call_count, function.startEA)
+                print("      |-- Distinct call count(%d) exceeds the threshold(%d), discarding suspicious function at 0x%X" % (call_count_from_function, self.max_call_count, function.start_ea))
             else:
-                print "      |-- Signature found in function at 0x%X" % function.startEA
+                print("      |-- Signature found in function at 0x%X" % function.start_ea)
                 return True
 
         return False
@@ -182,7 +182,7 @@ class GetTaintSink:
 
         for function_info in self.memcpy_like_functions:
             function_start_addr = function_info.address
-            print '[INFO]: Looking for memcpy signture inside function %s[0x%X](%d) => %d' % (function_info.name, function_info.address, function_info.arg_cnt, function_info.xrefs)
+            print('[INFO]: Looking for memcpy signture inside function %s[0x%X](%d) => %d' % (function_info.name, function_info.address, function_info.arg_cnt, function_info.xrefs))
             if self.is_memcpy_function(function_start_addr):
                 self.taint_sinks.append(function_info)
 
@@ -192,7 +192,7 @@ if __name__ == "__main__":
     get_taint_sink = GetTaintSink()
     get_taint_sink.get_sinks()
     taint_sinks = get_taint_sink.render_taint_sink()
-    print taint_sinks
+    print(taint_sinks)
 
     # helper.heuristic_sort_by_xrefs()
     # get_taint_sink.mark_potential_memcpy(500)

@@ -2,9 +2,8 @@ import _coretaint
 import angr
 import claripy
 import archinfo
-import simuvex
 import logging
-from itertools import product, izip
+from itertools import product
 from summary_functions import *
 import datetime
 import json
@@ -39,9 +38,9 @@ class BootloaderTaint:
         self._filename = filename
         self._arch = arch
         try:
-            self._p = angr.Project(filename, load_options={'main_opts': {'custom_arch': arch}})
+            self._p = angr.Project(filename, load_options={'main_opts': {'arch': arch}})
         except:
-            self._p = angr.Project(filename, load_options={'main_opts': {'custom_arch': arch, 'backend': 'blob'}})
+            self._p = angr.Project(filename, load_options={'main_opts': {'arch': arch, 'backend': 'blob'}})
         self._cfg = None
         self._core = None
         self._taint_buf = "taint_buf"
@@ -83,7 +82,7 @@ class BootloaderTaint:
                     phase = None
                     continue
                 if phase == 'base_addr':
-                    angr_base_addr = self._p.loader.main_bin.get_min_addr()
+                    angr_base_addr = self._p.loader.main_object.min_addr
                     ida_base_addr = int(line.strip(), 16)
                     if angr_base_addr != ida_base_addr:
                         base_addr = ida_base_addr
@@ -176,7 +175,7 @@ class BootloaderTaint:
                 if phase == 'base_addr':
                     try:
                         ida_base_addr = int(line.strip(), 16)
-                        angr_base_addr = self._p.loader.main_bin.get_min_addr()
+                        angr_base_addr = self._p.loader.main_object.min_addr
                         if angr_base_addr != ida_base_addr:
                             base_addr = ida_base_addr
                     except:
@@ -248,7 +247,7 @@ class BootloaderTaint:
                 tmp[s[1]] = []
             tmp[s[1]].append(s)
 
-        cartesian_prod = product(*tmp.itervalues())
+        cartesian_prod = product(*iter(tmp.values()))
 
         # Heuristic: filtering out the configuration which for the same source of taint
         # would taint different parameters.
@@ -273,11 +272,11 @@ class BootloaderTaint:
 
         # initialize the core taint module
         name = self._p.filename.split('/')[-1]
-        log_path = "/tmp/BootloaderTaint_" + name + "_.out"
+        log_path = "BootloaderTaint_" + name + "_.out"
         self._core = _coretaint._CoreTaint(self._p, interfunction_level=1, log_path=log_path, try_thumb=self._enable_thumb, exit_on_decode_error=self._exit_on_decode_error)
         self._core.start_logging()
 
-        for caller, poi in callers_and_poi.iteritems():
+        for caller, poi in callers_and_poi.items():
             sinks_info = list(poi['sinks'])
             sources_info = list(poi['sources'])
             l.info("Caller %s" % hex(caller))
@@ -289,7 +288,7 @@ class BootloaderTaint:
 
             s = self._p.factory.blank_state(
                 remove_options={
-                                simuvex.o.LAZY_SOLVES
+                                angr.options.LAZY_SOLVES
                 }
             )
 
@@ -311,7 +310,7 @@ class BootloaderTaint:
         
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print "Usage: " + sys.argv[0] + " config.file"
+        print("Usage: " + sys.argv[0] + " config.file")
         sys.exit(0)
 
     config_file = sys.argv[1]

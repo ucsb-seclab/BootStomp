@@ -54,9 +54,9 @@ def get_basic_block(instr_addr):
     flow_chart = FlowChart(function)
 
     for block in flow_chart:
-      if block.startEA <= instr_addr:
-        if block.endEA > instr_addr:
-          return block.startEA
+      if block.start_ea <= instr_addr:
+        if block.end_ea > instr_addr:
+          return block.start_ea
 
 
 # Populate the data structures by filling up information on methods found in the blob
