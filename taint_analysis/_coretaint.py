@@ -1,7 +1,6 @@
 import angr
 import claripy
 import logging
-import simuvex
 import random
 import capstone
 import signal
@@ -19,7 +18,7 @@ class MyFileHandler(object):
     def __getattr__(self, n):
         if hasattr(self._handler, n):
             return getattr(self._handler, n)
-        raise AttributeError, n
+        raise AttributeError(n)
 
 
 class TimeOutException(Exception):
@@ -33,7 +32,7 @@ class _CoreTaint:
     it exists a tainted path between a source and a sink. 
     """
 
-    def __init__(self, p, interfunction_level=0, log_path='/tmp/coretaint.out',
+    def __init__(self, p, interfunction_level=0, log_path='coretaint.out',
                  smart_call=True, follow_unsat=False, try_thumb=False,
                  default_log=True, exit_on_decode_error=True, concretization_strategy=None, force_paths=False):
         """
@@ -465,7 +464,7 @@ class _CoreTaint:
             # concretize all unconstrained children
             if cnt.symbolic:
                 # first check whether the value is already constrained
-                if str(cnt) in self._concretizations.keys():
+                if str(cnt) in list(self._concretizations.keys()):
                     conc = self._concretizations[str(cnt)]
                     if state_cp.se.solution(cnt, conc):
                         state_cp.add_constraints(cnt == conc)
@@ -625,10 +624,10 @@ class _CoreTaint:
         addr = suc_path.addr
 
         # check if call falls within bound binary
-        if addr > self._p.loader.max_addr() or addr < self._p.loader.min_addr():
+        if addr > self._p.loader.main_object.max_addr or addr < self._p.loader.main_object.min_addr:
             return False
 
-        for s_addr in self._summarized_f.keys():
+        for s_addr in list(self._summarized_f.keys()):
             if addr == s_addr:
                 self._summarized_f[s_addr](self, prev_path, suc_path)
                 return False
@@ -700,7 +699,7 @@ class _CoreTaint:
         """
         key = hash(''.join(sorted(list(set([x[0] for x in guards_info])))))
         bj = (key, next_path.addr, current_path.addr)
-        if bj not in self._back_jumps.keys():
+        if bj not in list(self._back_jumps.keys()):
             self._back_jumps[bj] = 1
         elif self._back_jumps[bj] > self._N:
             # we do not want to follow the same back jump infinite times
@@ -897,7 +896,7 @@ class _CoreTaint:
         self._fp.close()
 
     def _init_bss(self, state):
-        bss = [s for s in self._p.loader.main_bin.sections if s.name == '.bss']
+        bss = [s for s in self._p.loader.main_object.sections if s.name == '.bss']
         if not bss:
             return
 
@@ -920,7 +919,7 @@ class _CoreTaint:
         if use_smart_concretization:
             state.inspect.b(
                 'address_concretization',
-                simuvex.BP_AFTER,
+                angr.BP_AFTER,
                 action=self.addr_concrete_after
             )
 

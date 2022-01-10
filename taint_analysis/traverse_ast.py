@@ -25,15 +25,15 @@ class AstVisitor(ctree_visitor_t):
     def list_parents(self):
         for parent in self.parents:
             if parent is not None:
-                print "      |--- 0x%X [%d]" % (parent.ea, parent.op)
+                print("      |--- 0x%X [%d]" % (parent.ea, parent.op))
 
 
     def show_use_def_map(self):
-        print "\n----------------------\nUse-def map\n----------------------"
-        for variable, method_info in self.use_def_map.iteritems():
+        print("\n----------------------\nUse-def map\n----------------------")
+        for variable, method_info in self.use_def_map.items():
             method_name, method_address, expr_addr = method_info
-            print "%3s = %s[0x%X] at 0x%X" % ("v" + str(variable), method_name, method_address, expr_addr)
-        print
+            print("%3s = %s[0x%X] at 0x%X" % ("v" + str(variable), method_name, method_address, expr_addr))
+        print()
 
 
     def cast_node_type(self, node):
@@ -52,7 +52,7 @@ class AstVisitor(ctree_visitor_t):
         if parent is not None:
             parent = self.cast_node_type(parent)
         else:
-            print "[ERROR]: parent is None"
+            print("[ERROR]: parent is None")
             exit(1)
 
         return parent
@@ -99,7 +99,7 @@ class AstVisitor(ctree_visitor_t):
                 var_rhs_idx = expr_rhs.v.idx
                 method_info = self.use_def_map.get(var_rhs_idx)
                 if method_info is None:
-                    print "[INFO]: No def found for variable v%d at 0x%X" % (var_rhs_idx, expr_addr)
+                    print("[INFO]: No def found for variable v%d at 0x%X" % (var_rhs_idx, expr_addr))
                     return
                 else:
                     method_name, method_address, expr_addr = method_info
@@ -127,8 +127,8 @@ class AstVisitor(ctree_visitor_t):
 
     def show_call_trace(self):
         for node in self.node_chain:
-            print "      |--- 0x%X [%d]" % (node.ea, node.op)
-        print
+            print("      |--- 0x%X [%d]" % (node.ea, node.op))
+        print()
 
 
     def find_node(self, root, node_type):
@@ -179,8 +179,8 @@ class AstVisitor(ctree_visitor_t):
                         if var is not None:
                             function_args.append(var.v.idx)
                         if arg.ea == self.log_message_xref_addr:
-                            print "\n---------------------------------------\nFound log message string as a method argument\n---------------------------------------"
-                            print "[*] %s [0x%X]" % (method_name, expr.ea)
+                            print("\n---------------------------------------\nFound log message string as a method argument\n---------------------------------------")
+                            print("[*] %s [0x%X]" % (method_name, expr.ea))
                             self.found = True
                             self.list_parents()
                             self.copy_call_trace()
@@ -190,8 +190,8 @@ class AstVisitor(ctree_visitor_t):
 
         if self.ast_pass == 2:
             if expr.ea == self.node_addr and expr.op == self.node_type:
-                print "\n---------------------------------------\nFound log message string as a variable assignment\n---------------------------------------"
-                print "[*] v%d [0x%X]" % (expr.x.v.idx, expr.ea)
+                print("\n---------------------------------------\nFound log message string as a variable assignment\n---------------------------------------")
+                print("[*] v%d [0x%X]" % (expr.x.v.idx, expr.ea))
                 self.found = True
                 self.list_parents()
                 self.copy_call_trace()
@@ -202,7 +202,7 @@ class AstVisitor(ctree_visitor_t):
 
         if self.ast_pass == 3:
             if expr.ea == self.node_addr and expr.op == self.node_type:
-                print "[INFO]: Found node at 0x%X of type %d" % (self.node_addr, self.node_type)
+                print("[INFO]: Found node at 0x%X of type %d" % (self.node_addr, self.node_type))
                 self.found = True
                 self.required_node = expr
 

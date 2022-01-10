@@ -2,10 +2,9 @@ import _coretaint
 import angr
 import claripy
 import archinfo
-import simuvex
 import logging
-from itertools import product, izip
-from summary_functions import *
+from itertools import product
+import summary_functions import *
 import bootloadertaint
 
 l = logging.getLogger("CoverageTest")
@@ -32,7 +31,7 @@ class CoverageTest:
 
         self._filename = filename
         self._arch = arch
-        self._p = angr.Project(filename, load_options={'main_opts': {'custom_arch': arch}})
+        self._p = angr.Project(filename, load_options={'main_opts': {'arch': arch}})
         self._cfg = None
         self._core = None
         self._taint_buf = "taint_buf"
@@ -76,7 +75,7 @@ class CoverageTest:
                     phase = 'sinks'
                     continue
                 if phase == 'base_addr':
-                    angr_base_addr = self._p.loader.main_bin.get_min_addr()
+                    angr_base_addr = self._p.loader.main_object.min_addr
                     ida_base_addr = int(line.strip(), 16)
                     if angr_base_addr != ida_base_addr:
                         self._base_addr = ida_base_addr
@@ -170,7 +169,7 @@ class CoverageTest:
                 if phase == 'base_addr':
                     try:
                         ida_base_addr = int(line.strip(), 16)
-                        angr_base_addr = self._p.loader.main_bin.get_min_addr()
+                        angr_base_addr = self._p.loader.main_object.min_addr
                         if angr_base_addr != ida_base_addr:
                             base_addr = ida_base_addr
                     except:
@@ -242,7 +241,7 @@ class CoverageTest:
                 tmp[s[1]] = []
             tmp[s[1]].append(s)
 
-        cartesian_prod = product(*tmp.itervalues())
+        cartesian_prod = product(*iter(tmp.values()))
 
         # Heuristic: filtering out the configuration which for the same source of taint
         # would taint different parameters.
@@ -284,7 +283,7 @@ class CoverageTest:
         cp.step()
 
         # we are in a functions
-        if (current_path.addr + self._base_addr) in self._info_functions.keys():
+        if (current_path.addr + self._base_addr) in list(self._info_functions.keys()):
             self._functions_touched.add(current_path.addr + self._base_addr)
 
         # we have a loop or an if
@@ -309,13 +308,13 @@ class CoverageTest:
         self._parse_info_functions()
         # initialize the core taint module
         name = self._p.filename.split('/')[-1]
-        log_path = "/tmp/CoverageTest_" + name + "_.out"
+        log_path = "CoverageTest_" + name + "_.out"
         self._core = _coretaint._CoreTaint(self._p, interfunction_level=1, log_path=log_path, try_thumb=self._thumb, default_log=False)
         self._core.start_logging()
         self._core._N = 0
 
 
-        for caller, poi in callers_and_poi.iteritems():
+        for caller, poi in callers_and_poi.items():
             sinks_info = list(poi['sinks'])
             sources_info = list(poi['sources'])
             l.info("Caller %s" % hex(caller))
@@ -333,10 +332,10 @@ class CoverageTest:
 
                 # prepare the under-contrainted-based initial state
                 s = self._p.factory.blank_state(
-                    # add_options={simuvex.o.UNDER_CONSTRAINED_SYMEXEC},
+                    # add_options={angr.options.UNDER_CONSTRAINED_SYMEXEC},
                     remove_options={
-                        # simuvex.o.CGC_ZERO_FILL_UNCONSTRAINED_MEMORY,
-                        simuvex.o.LAZY_SOLVES
+                        # angr.options.CGC_ZERO_FILL_UNCONSTRAINED_MEMORY,
+                        angr.options.LAZY_SOLVES
                     }
                 )
 
@@ -385,11 +384,11 @@ class CoverageTest:
 
 
 if __name__ == "__main__":
-    #data = [['../huawei_p8/ale_l23/fastboot.img', '/tmp/info.taint.fastboot_real', '/tmp/info.functions.fastboot']]
-    #data = [['/media/badnack/Documents/Code/bootloader/analysis/nexus_9/hboot.img', '/tmp/info.taint.hboot', '/tmp/info.functions.hboot']]
-    data = [['/media/badnack/Documents/Code/bootloader/analysis/xperia_xa/lk_trim.img', '/tmp/info.taint.mediatek', '/tmp/info.functions.mediatek']]
-    #data = [['/media/badnack/Documents/Code/bootloader/analysis/Evaluation/LK/unpatched/lk_unpatched','/tmp/info.taint.lk_unpatched', '/tmp/info.functions.lk_unpatched']]
-    #data = [['/media/badnack/Documents/Code/bootloader/analysis/Evaluation/LK/latest/lk_latest', '/tmp/info.taint.lk', '/tmp/info.functions.lk']]
+    #data = [['../huawei_p8/ale_l23/fastboot.img', 'info.taint.fastboot_real', 'info.functions.fastboot']]
+    #data = [['/media/badnack/Documents/Code/bootloader/analysis/nexus_9/hboot.img', 'info.taint.hboot', 'info.functions.hboot']]
+    data = [['/media/badnack/Documents/Code/bootloader/analysis/xperia_xa/lk_trim.img', 'info.taint.mediatek', 'info.functions.mediatek']]
+    #data = [['/media/badnack/Documents/Code/bootloader/analysis/Evaluation/LK/unpatched/lk_unpatched','info.taint.lk_unpatched', 'info.functions.lk_unpatched']]
+    #data = [['/media/badnack/Documents/Code/bootloader/analysis/Evaluation/LK/latest/lk_latest', 'info.taint.lk', 'info.functions.lk']]
 
     for filename, path, info_functions_file in data:
         thumb = False

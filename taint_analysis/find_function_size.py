@@ -18,9 +18,9 @@ if __name__ == "__main__":
         arch = archinfo.arch_aarch64.ArchAArch64
 
     try:
-        project = angr.Project(boot_img, load_options={'main_opts': {'custom_arch': arch}})
+        project = angr.Project(boot_img, load_options={'main_opts': {'arch': arch}})
     except:
-        project = angr.Project(boot_img, load_options={'main_opts': {'custom_arch': arch, 'backend': 'blob'}})
+        project = angr.Project(boot_img, load_options={'main_opts': {'arch': arch, 'backend': 'blob'}})
 
     function_size_map = {}
     cfg = project.analyses.CFG()
@@ -32,5 +32,5 @@ if __name__ == "__main__":
         function_size_map[entry_point] = sum(basic_block_sizes)
 
     with open(func_info_file, 'w') as fp:
-        for addr, size in function_size_map.items():
+        for addr, size in list(function_size_map.items()):
             fp.write(("0x%X" % addr) + ', ' + str(size) + '\n')

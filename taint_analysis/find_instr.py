@@ -13,7 +13,7 @@ instr_addresses = []    # Addresses of instructions containing the opcode
 instr_func_addresses = set()    # Names of distinct methods where those instructions occur in
 
 
-def find_instr(instr, seg_start = SegStart(ea), seg_end = SegEnd(ea)):
+def find_instr(instr, seg_start = get_segm_start(ea), seg_end = get_segm_end(ea)):
     """
     Finds machines instructions using the particular opcode
     Input: instr => Opcode to be searched for
@@ -32,7 +32,7 @@ def find_instr(instr, seg_start = SegStart(ea), seg_end = SegEnd(ea)):
 
         # Check if the instruction lies in a function recognized by IDA
         if instr_belogs_to_func is not None:
-            instr_func_addresses.add(get_func_name(instr_belogs_to_func.startEA))   # Get the mnemonic function named by IDA
+            instr_func_addresses.add(get_func_name(instr_belogs_to_func.start_ea))   # Get the mnemonic function named by IDA
         else:
             instr_func_addresses.add("instr_" + str(instr_address))     # Name the function in the form of "instr_<address>""
 
@@ -42,5 +42,5 @@ def find_instr(instr, seg_start = SegStart(ea), seg_end = SegEnd(ea)):
 
 instr = "BLR"   # Search for BLR, the absolute jump
 find_instr(instr)
-print "{} occurrences: ".format(instr), len(instr_addresses)
-print "Distinct functions: ", len(instr_func_addresses)
+print("{} occurrences: ".format(instr), len(instr_addresses))
+print("Distinct functions: ", len(instr_func_addresses))
